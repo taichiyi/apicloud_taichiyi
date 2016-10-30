@@ -1,0 +1,587 @@
+/*
+ * =========================================================================
+ * APIClud - gazer UI 框架    格致网络  http://www.gazer.cc
+ * gazer Flex
+ * Verson 0.0.1
+ * =========================================================================
+ */
+
+
+/*容器*/
+
+.gazer-flex-col,
+.gazer-flex-row {
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+}
+
+.gazer-flex-col:before,
+.gazer-flex-row:before,
+.gazer-flex-col:after,
+.gazer-flex-row:after {
+    content: " ";
+    display: -webkit-flex;
+    box-sizing: border-box;
+}
+
+.gazer-flex-col:after,
+.gazer-flex-row:after {
+    clear: both;
+}
+
+.gazer-flex-col {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.gazer-flex-row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+
+/*栅格*/
+
+.gazer-flex-offset-l-d {
+    margin-left: 2.08333333%;
+}
+
+.gazer-flex-offset-r-d {
+    margin-right: 2.08333333%;
+}
+
+.gazer-flex-offset-0-d {
+    margin-right: 2.08333333%;
+    margin-left: 2.08333333%;
+}
+
+.gazer-flex-item-1 {
+    float: left;
+    width: 4.16666666%;
+}
+.gazer-flex-item-1:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-1 {
+    margin-left: 4.16666666%;
+}
+
+.gazer-flex-offset-r-1 {
+    margin-right: 4.16666666%;
+}
+
+.gazer-flex-offset-0-1 {
+    margin-right: 4.16666666%;
+    margin-left: 4.16666666%;
+}
+
+.gazer-flex-item-2 {
+    float: left;
+    width: 8.33333333%;
+}
+.gazer-flex-item-2:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-2 {
+    margin-left: 8.33333333%;
+}
+
+.gazer-flex-offset-r-2 {
+    margin-right: 8.33333333%;
+}
+
+.gazer-flex-offset-0-2 {
+    margin-right: 8.33333333%;
+    margin-left: 8.33333333%;
+}
+
+.gazer-flex-item-3 {
+    float: left;
+    width: 12.5%;
+}
+.gazer-flex-item-3:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-3 {
+    margin-left: 12.5%;
+}
+
+.gazer-flex-offset-r-3 {
+    margin-right: 12.5%;
+}
+
+.gazer-flex-offset-0-3 {
+    margin-right: 12.5%;
+    margin-left: 12.5%;
+}
+
+.gazer-flex-item-4 {
+    float: left;
+    width: 16.66666666%;
+}
+.gazer-flex-item-4:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-4 {
+    margin-left: 16.66666666%;
+}
+
+.gazer-flex-offset-r-4 {
+    margin-right: 16.66666666%;
+}
+
+.gazer-flex-offset-0-4 {
+    margin-right: 16.66666666%;
+    margin-left: 16.66666666%;
+}
+
+.gazer-flex-offset-l-5 {
+    margin-left: 20.833333333%;
+}
+.gazer-flex-offset-r-5 {
+    margin-right: 20.833333333%;
+}
+
+.gazer-flex-item-5 {
+    float: left;
+    width: 20.833333333%;
+}
+.gazer-flex-item-5:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-6 {
+    margin-left: 25%;
+}
+.gazer-flex-offset-r-6 {
+    margin-right: 25%;
+}
+
+.gazer-flex-item-6 {
+    float: left;
+    width: 25%;
+}
+.gazer-flex-item-6:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-7 {
+    margin-left: 29.16666666%;
+}
+.gazer-flex-offset-r-7 {
+    margin-right: 29.16666666%;
+}
+
+.gazer-flex-item-7 {
+    float: left;
+    width: 29.16666666%;
+}
+.gazer-flex-item-7:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-8 {
+    margin-left: 33.33333333%;
+}
+.gazer-flex-offset-r-8 {
+    margin-right: 33.33333333%;
+}
+
+.gazer-flex-item-8 {
+    float: left;
+    width: 33.33333333%;
+}
+.gazer-flex-item-8:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-9 {
+    margin-left: 37.5%;
+}
+.gazer-flex-offset-r-9 {
+    margin-right: 37.5%;
+}
+
+.gazer-flex-item-9 {
+    float: left;
+    width: 37.5%;
+}
+.gazer-flex-item-9:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-10 {
+    margin-left: 41.66666666%;
+}
+.gazer-flex-offset-r-10 {
+    margin-right: 41.66666666%;
+}
+
+.gazer-flex-item-10 {
+    float: left;
+    width: 41.66666666%;
+}
+.gazer-flex-item-10:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-order-10 {
+    -webkit-box-ordinal-group: 11;
+    -webkit-order: 10;
+    order: 10;
+}
+
+.gazer-flex-offset-l-11 {
+    margin-left: 45.833333333%;
+}
+.gazer-flex-offset-r-11 {
+    margin-right: 45.833333333%;
+}
+
+.gazer-flex-item-11 {
+    float: left;
+    width: 45.833333333%;
+}
+.gazer-flex-item-11:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-offset-l-12 {
+    margin-left: 50%;
+}
+.gazer-flex-offset-r-12 {
+    margin-right: 50%;
+}
+
+.gazer-flex-item-12 {
+    float: left;
+    width: 50%;
+}
+.gazer-flex-item-12:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-item-13 {
+    float: left;
+    width: 54.16666666%;
+}
+.gazer-flex-item-13:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.gazer-flex-item-14 {
+    float: left;
+    width: 58.33333333%;
+}
+.gazer-flex-item-14:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-15 {
+    float: left;
+    width: 62.5%;
+}
+.gazer-flex-item-15:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-16 {
+    float: left;
+    width: 66.6666666%;
+}
+.gazer-flex-item-16:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-17 {
+    float: left;
+    width: 70.83333333%;
+}
+.gazer-flex-item-17:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-18 {
+    float: left;
+    width: 75%;
+}
+.gazer-flex-item-18:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-19 {
+    float: left;
+    width: 79.1666666%;
+}
+.gazer-flex-item-19:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-20 {
+    float: left;
+    width: 83.33333333%;
+}
+.gazer-flex-item-20:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-21 {
+    float: left;
+    width: 87.5%;
+}
+.gazer-flex-item-21:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-22 {
+    float: left;
+    width: 91.6666666%;
+}
+.gazer-flex-item-22:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-23 {
+    float: left;
+    width: 95.833333333%;
+}
+.gazer-flex-item-23:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+
+.gazer-flex-item-24 {
+    float: left;
+    width: 100%;
+}
+/*.gazer-flex-item-24:after{
+    content: "1";
+    display: inline-block;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+}*/
+
+
+.gazer-flex-auto {
+    float: left;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+
+.gazer-flex-between {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+
+/*对齐*/
+
+.gazer-flex-col.gazer-flex-left {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.gazer-flex-col.gazer-flex-right {
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+.gazer-flex-col.gazer-flex-top {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.gazer-flex-col.gazer-flex-bottom {
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+}
+
+.gazer-flex-col.gazer-flex-center {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.gazer-flex-col.gazer-flex-middle {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.gazer-flex-row.gazer-flex-left {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.gazer-flex-row.gazer-flex-right {
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+}
+
+.gazer-flex-row.gazer-flex-top {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.gazer-flex-row.gazer-flex-bottom {
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+.gazer-flex-row.gazer-flex-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.gazer-flex-row.gazer-flex-middle {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+[class*=gazer-flex-auto].gazer-flex-left {
+    margin-right: auto;
+}
+
+[class*=gazer-flex-auto].gazer-flex-right {
+    margin-left: auto;
+}
+
+[class*=gazer-flex-auto].gazer-flex-top {
+    margin-bottom: auto;
+}
+
+[class*=gazer-flex-auto].gazer-flex-bottom {
+    margin-top: auto;
+}
+
+[class*=gazer-flex-auto].gazer-flex-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+[class*=gazer-flex-auto].gazer-flex-middle {
+    margin-top: auto;
+    margin-bottom: auto;
+}
