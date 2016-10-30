@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>code_cont</title>
+    <link rel="stylesheet" href="../css/gazer-flex.css" />
+    <link rel="stylesheet" href="../css/gazer.css">
+    <script src="./ezapp/ezapp.js"></script>
+    <style type="text/css">
+    * {
+        -webkit-user-select: text !important;
+    }
+    
+    h1 {
+        padding-left: 15px;
+        padding-top: 15px;
+    }
+    
+    section {
+        margin-bottom: 15px;
+    }
+    
+    pre {
+        margin: 0px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+    }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1></h1>
+        <pre></pre>
+    </section>
+    <section>
+        <h1>背景图片</h1>
+        <pre>
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+background-image: url(../image/T1.png);
+</pre>
+    </section>
+    <section>
+        <h1>修改输入框占位符样式(placeholder)</h1>
+        <pre>
+input::-webkit-input-placeholder {
+    color: rgb(140, 140, 140);
+    font-size: 14px;
+}
+</pre>
+    </section>
+    <section>
+        <h1>设置背景图片CSS</h1>
+        <pre>
+var urlStr = 'url(' + ret.data + ')';
+$('#game').css("background-image", urlStr);
+</pre>
+    </section>
+    <section>
+        <h1>阻止向上冒泡</h1>
+        <pre>
+event.stopPropagation();
+</pre>
+    </section>
+    <section>
+        <h1>监听win显示到前端事件</h1>
+        <pre>
+api.addEventListener({
+    name: 'viewappear'
+}, function(ret, err) {
+    Q.call('loadData();','','hotGroupList','hotGroupList_cont');
+});
+</pre>
+    </section>
+    <section>
+        <h1>双击退出应用</h1>
+        <pre>
+var exit_app = function() {
+    api.addEventListener({
+        name: 'keyback'
+    }, function(ret, err) {
+        api.toast({
+            msg: '再次点击退出' + api.appName,
+            duration: 2000,
+            location: 'bottom'
+        });
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            api.closeWidget({
+                id: 'A6918353911387', //你的APPid
+                retData: {
+                    name: 'closeWidget'
+                },
+                animation: {
+                    type: 'flip',
+                    subType: 'from_bottom',
+                    duration: 500
+                },
+                silent: true
+            });
+        });
+        setTimeout(function() {
+            exit_app();
+        }, 2000);
+    });
+}
+exit_app();
+        </pre>
+    </section>
+    <section>
+        <h1>表单验证模块</h1>
+        <pre>
+/*表单验证模块 -start-*/
+var data = {},
+    dataInfo = {},
+    regular; //存放正则表达式
+var tips_text = '请填写所有必填项';
+$('.gazer-role-subform').each(function() {
+    var info = {};
+    info['val'] = $(this).val();
+    info['required'] = $(this).data('required');
+    info['tips'] = $(this).data('tips');
+    info['eqlength'] = $(this).data('eqlength');
+    info['maxlength'] = $(this).data('maxlength');
+    info['minlength'] = $(this).data('minlength');
+    info['regular'] = $(this).data('regular');
+    dataInfo[$(this).attr('name')] = info;
+    if ($(this).attr('name').length !== 0) { //没有name属性或为空,其目的只是为了验证
+        data[$(this).attr('name')] = $(this).val();
+    }
+});
+for (var i in dataInfo) {
+    // 必填项目,所有项目默认为必填(required等于0时为选填)
+    if (dataInfo[i].required !== '0') {
+        // 是否用正则表达式
+        if (dataInfo[i].regular !== undefined) {
+            // ALERT(dataInfo[i].regular);
+            regular = eval(dataInfo[i].regular);
+            if (!regular.test(dataInfo[i].val)) {
+                tips_text = dataInfo[i].tips || tips_text;
+                tips(tips_text);
+                return false;
+            }
+        } else {
+            if (dataInfo[i].eqlength !== undefined && dataInfo[i].eqlength.length !== 0) {
+                // 验证,值的长度是否等于设定的值
+                if (dataInfo[i].val.length !== dataInfo[i].eqlength) {
+                    tips_text = dataInfo[i].tips || tips_text;
+                    tips(tips_text);
+                    return false;
+                };
+            } else {
+                if (dataInfo[i].maxlength !== undefined && dataInfo[i].maxlength.length !== 0) {
+                    // 验证,值的长度是否大于设定的值
+                    if (dataInfo[i].val.length > dataInfo[i].maxlength) {
+                        tips_text = dataInfo[i].tips || tips_text;
+                        tips(tips_text);
+                        return false;
+                    };
+                };
+                if (dataInfo[i].minlength !== undefined && dataInfo[i].minlength.length !== 0) {
+                    // 验证,值的长度是否小于设定的值
+                    if (dataInfo[i].val.length < dataInfo[i].minlength) {
+                        tips_text = dataInfo[i].tips || tips_text;
+                        tips(tips_text);
+                        return false;
+                    };
+                };
+            };
+        }
+
+        if (dataInfo[i].val.length === 0) {
+            // 必填项,不能为空
+            tips_text = dataInfo[i].tips || tips_text;
+            tips(tips_text);
+            return false;
+        };
+    };
+}
+/*表单验证模块 -end-*/
+
+        </pre>
+    </section>
+    <section>
+        <h1>时间-补0</h1>
+        <pre>
+minute = Number(minute);
+if (minute < 10) {
+    minute = '0' + minute;
+}
+        </pre>
+    </section>
+    <section>
+        <h1>输入控制-手机号和验证码(正整数)</h1>
+        <pre>
+oninput="/^[0-9]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
+        </pre>
+    </section>
+    <section>
+        <h1>输入控制-金额(正数)</h1>
+        <pre>
+oninput="/^[0-9]*(\.)?[0-9]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
+        </pre>
+    </section>
+    <section>
+        <h1>输入控制-密码</h1>
+        <pre>
+oninput="/^[\w\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\[\]\{\}\|\;\:\,\.\/\<\>\?]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
+        </pre>
+    </section>
+    <section>
+        <h1>输入控制-中文</h1>
+        <pre>
+oninput="/^[\u4e00-\u9fa5]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
+        </pre>
+    </section>
+    <section>
+        <h1>0.5像素边框</h1>
+        <pre>
+.search-wrap:before {
+    border-radius: 28px;
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border: 1px solid rgb(218, 218, 218);
+    -webkit-transform-origin: 0 0;
+    -webkit-transform: scale(0.5, 0.5);
+    -webkit-box-sizing: border-box;
+}
+        </pre>
+    </section>
+    <script src="../script/common.js"></script>
+    <script type="text/javascript">
+    /*方法定义*/
+    function loadData() {
+
+    }
+
+    /*初始化*/
+    Q.ready(function() {
+        loadData();
+    });
+    </script>
+</body>
+
+</html>
