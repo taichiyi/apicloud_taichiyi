@@ -52,6 +52,11 @@
         <pre></pre>
     </section>
     <section class="section">
+        <h1 class="h1">第三方登录</h1>
+        <pre class="pre" id="otherLogin">
+</pre>
+    </section>
+    <section class="section">
         <h1 class="h1">微信支付</h1>
         <pre class="pre" id="wxpay">
 </pre>
@@ -98,7 +103,7 @@ event.stopPropagation();
 api.addEventListener({
     name: 'viewappear'
 }, function(ret, err) {
-    Q.call('loadData();','','hotGroupList','hotGroupList_cont');
+    
 });
 </pre>
     </section>
@@ -177,41 +182,31 @@ for (var i in dataInfo) {
     };
 }
 /*表单验证模块 -end-*/
-
-        </pre>
-    </section>
-    <section class="section">
-        <h1 class="h1">时间-补0</h1>
-        <pre class="pre">
-minute = Number(minute);
-if (minute < 10) {
-    minute = '0' + minute;
-}
-        </pre>
+</pre>
     </section>
     <section class="section">
         <h1 class="h1">输入控制-手机号和验证码(正整数)</h1>
         <pre class="pre">
-oninput="/^[0-9]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
-        </pre>
+ oninput="/^[0-9]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
+</pre>
     </section>
     <section class="section">
         <h1 class="h1">输入控制-金额(正数)</h1>
         <pre class="pre">
-oninput="/^[0-9]*(\.)?[0-9]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
-        </pre>
+ oninput="/^[0-9]*(\.)?[0-9]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
+</pre>
     </section>
     <section class="section">
         <h1 class="h1">输入控制-密码</h1>
         <pre class="pre">
-oninput="/^[\w\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\[\]\{\}\|\;\:\,\.\/\<\>\?]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
-        </pre>
+ oninput="/^[\w\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\[\]\{\}\|\;\:\,\.\/\<\>\?]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
+</pre>
     </section>
     <section class="section">
         <h1 class="h1">输入控制-中文</h1>
         <pre class="pre">
-oninput="/^[\u4e00-\u9fa5]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
-        </pre>
+ oninput="/^[\u4e00-\u9fa5]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
+</pre>
     </section>
     <section class="section">
         <h1 class="h1">0.5像素边框</h1>
@@ -227,7 +222,7 @@ oninput="/^[\u4e00-\u9fa5]*$/.test(this.value) ? this.setAttribute('data-on-val'
     -webkit-transform: scale(0.5, 0.5);
     -webkit-box-sizing: border-box;
 }
-        </pre>
+</pre>
     </section>
     <!-- <script src="./js/common.js"></script> -->
     <script type="text/javascript">
@@ -259,6 +254,7 @@ oninput="/^[\u4e00-\u9fa5]*$/.test(this.value) ? this.setAttribute('data-on-val'
     </script>
 </body>
 <script>
+// 微信支付
 function wx_pay_wrap() {
     /**
      * 微信支付
@@ -344,6 +340,7 @@ function wx_pay_wrap() {
 }
 $('#wxpay').html(wx_pay_wrap + '');
 
+// 支付宝支付
 function ali_pay_wrap() {
     /**
      * 支付宝支付
@@ -410,7 +407,8 @@ function ali_pay_wrap() {
 $('#alipay').html(ali_pay_wrap + '');
 
 
-var exit_app = function() {
+// 双击退出应用
+function exit_app() {
     api.addEventListener({
         name: 'keyback'
     }, function(ret, err) {
@@ -441,6 +439,252 @@ var exit_app = function() {
     });
 }
 $('#exit-app').html(exit_app + '');
+
+// 第三方登录
+function otherLogin_wrap() {
+    var wx, isInstalled_wx = false, //微信模块
+        qq, isInstalled_qq = false, //qq模块
+        wb, isInstalled_wb = false; //微博模块
+
+    function loadData() {
+        var ischeck_wx = false,
+            ischeck_qq = false,
+            ischeck_weibo = false;
+
+        wx = api.require('wx');
+        qq = api.require('qq');
+        weibo = api.require('weibo');
+
+        function isInstalled_tmpl() {
+            if (ischeck_wx && ischeck_qq && ischeck_weibo) {
+                var tmpl = Q.tmpl($("#template-li").html());
+                $("#template-ul").html(tmpl());
+            }
+        }
+
+
+        wx.isInstalled(function(ret, err) {
+            if (ret.installed) {
+                // 当前设备已安装微信客户端
+                isInstalled_wx = true;
+            } else {
+                // 当前设备未安装微信客户端
+                isInstalled_wx = false;
+            }
+            ischeck_wx = true;
+            isInstalled_tmpl();
+        });
+
+        qq.installed(function(ret, err) {
+            if (ret.status) {
+                // 安装
+                isInstalled_qq = true;
+            } else {
+                // 没有安装
+                isInstalled_qq = false;
+            }
+            ischeck_qq = true;
+            isInstalled_tmpl();
+        });
+
+        weibo.isInstalled(function(ret) {
+            if (ret.status) {
+                // 已安装新浪微博客户端
+                isInstalled_wb = true;
+            } else {
+                // 未安装新浪微博客户端
+                isInstalled_wb = false;
+            }
+            ischeck_weibo = true;
+            isInstalled_tmpl();
+        });
+    }
+
+    function otherLogin(datas) {
+        api.showProgress();
+        callAPI(OTHER_LOGIN, datas, function(ret) {
+            if (ret.code === 200) {
+                cache.set('user', ret.datas);
+                setTimeout("api.execScript({name: 'root',script: 'loadRongCloud2();'});", 1400);
+                setTimeout("api.execScript({name: 'root',script: 'loadAjpush();'});", 1800);
+                setTimeout("Q.call('loadData()', '', 'root', 'home_cont');", 100);
+                setTimeout("Q.call('loadDataBg()', '', 'root', 'home_me');", 300);
+
+                setTimeout("api.hideProgress();Q.window.close();", 2100);
+            } else {
+                api.hideProgress();
+                tips(ret.datas.error);
+            }
+        }, '', 1);
+    }
+
+    function qqLogin() {
+        api.showProgress();
+        qq.login(function(res, err) {
+            api.hideProgress();
+            if (res.status) {
+
+                qq.getUserInfo(function(ret, err) {
+                    if (ret.status) {
+
+                        var datas = {};
+                        datas['type'] = 'qq';
+                        datas['openId'] = res.openId;
+                        datas['info'] = JSON.stringify(ret.info);
+                        otherLogin(datas);
+
+                    } else {
+                        api.toast({
+                            msg: err.msg,
+                            duration: 2000,
+                            location: 'bottom'
+                        });
+                    }
+
+                });
+
+            } else {
+                api.toast({
+                    msg: err.msg,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            }
+
+        });
+    }
+
+    function wxLogin() {
+        api.showProgress();
+        wx.auth(function(ret, err) {
+            if (ret.status) {
+                wx.getToken({
+                    code: ret.code
+                }, function(ret, err) {
+                    if (ret.status) {
+                        wx.getUserInfo({
+                            accessToken: ret.accessToken,
+                            openId: ret.openId
+                        }, function(ret, err) {
+                            if (ret.status) {
+                                var datas = {};
+                                datas['type'] = 'wechat';
+                                datas['openid'] = ret.openid
+                                datas['info'] = JSON.stringify(ret.info);
+                                otherLogin(datas);
+                            }
+                        });
+                    } else {
+                        switch (err.code) {
+                            case -1:
+                                tips('未知错误');
+                                break;
+                            case 0:
+                                tips('成功');
+                                break;
+                            case 1:
+                                tips('apiKey值为空或非法');
+                                break;
+                            case 2:
+                                tips('apiSecret值为空或非法');
+                                break;
+                            case 3:
+                                tips('code值为空或非法');
+                                break;
+                            case 4:
+                                tips('网络超时');
+                                break;
+                            default:
+                                tips('未知错误');
+                                break;
+                        }
+                    }
+                });
+            } else {
+                switch (err.code) {
+                    case -1:
+                        tips('未知错误');
+                        break;
+                    case 0:
+                        tips('成功');
+                        break;
+                    case 1:
+                        tips('用户取消');
+                        break;
+                    case 2:
+                        tips('用户拒绝授权');
+                        break;
+                    case 3:
+                        tips('当前设备未安装微信客户端');
+                        break;
+                    default:
+                        tips('未知错误');
+                        break;
+                }
+            }
+        });
+    }
+
+    function wbLogin() {
+        api.showProgress();
+        weibo.auth(function(res, err) {
+            api.hideProgress();
+            if (res.status) {
+                weibo.getUserInfo({
+                    token: res.token,
+                    userId: res.userId
+                }, function(ret, err) {
+                    if (ret.status) {
+                        var datas = {};
+                        datas['type'] = 'weibo';
+                        datas['openid'] = ret.userInfo.idstr;
+                        datas['info'] = ret.userInfo;
+                        cache.set('datas', datas);
+                        otherLogin(datas);
+                    } else {
+                        switch (err.code) {
+                            case -1:
+                                tips('token 或 userId 非法');
+                                break;
+                            case 1:
+                                tips('网络超时');
+                                break;
+                            default:
+                                tips('未知错误');
+                                break;
+                        }
+                    }
+                });
+            } else {
+                switch (err.code) {
+                    case -1:
+                        tips('apiKey 或 registUrl 值非法');
+                        break;
+                    case 1:
+                        tips('用户取消');
+                        break;
+                    case 2:
+                        tips('发送失败');
+                        break;
+                    case 3:
+                        tips('授权失败');
+                        break;
+                    case 4:
+                        tips('不支持的请求');
+                        break;
+                    case 5:
+                        tips('不支持的请求');
+                        break;
+                    default:
+                        tips('未知错误');
+                        break;
+                }
+            }
+        });
+    }
+
+}
+$('#otherLogin').html(otherLogin_wrap + '');
 </script>
 
 </html>
