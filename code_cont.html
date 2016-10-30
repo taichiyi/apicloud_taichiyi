@@ -6,12 +6,18 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>code_cont</title>
-    <link rel="stylesheet" href="../css/gazer-flex.css" />
-    <link rel="stylesheet" href="../css/gazer.css">
-    <script src="./ezapp/ezapp.js"></script>
+    <link rel="stylesheet" href="./css/gazer-flex.css" />
+    <link rel="stylesheet" href="./css/gazer.css">
+    <script src="./js/zepto-taichiyi.js"></script>
     <style type="text/css">
+    body {
+        background-color: #f7f8f9;
+        color: rgb(56, 56, 56);
+    }
+    
     * {
-        -webkit-user-select: text !important;
+        /*-webkit-user-select: all !important;*/
+        /*-webkit-user-select: text !important;*/
     }
     
     h1 {
@@ -27,49 +33,68 @@
         margin: 0px;
         padding-bottom: 15px;
         padding-left: 15px;
+        -webkit-user-select: all !important;
+    }
+    
+    .pre {
+        display: none;
+    }
+    
+    .active .pre {
+        display: block;
     }
     </style>
 </head>
 
 <body>
-    <section>
+    <section class="section">
         <h1></h1>
         <pre></pre>
     </section>
-    <section>
-        <h1>背景图片</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">微信支付</h1>
+        <pre class="pre" id="wxpay">
+</pre>
+    </section>
+    <section class="section">
+        <h1 class="h1">支付宝支付</h1>
+        <pre class="pre" id="alipay">
+</pre>
+    </section>
+    <section class="section">
+        <h1 class="h1">背景图片</h1>
+        <pre class="pre">
 background-repeat: no-repeat;
 background-position: center;
 background-size: cover;
 background-image: url(../image/T1.png);
 </pre>
     </section>
-    <section>
-        <h1>修改输入框占位符样式(placeholder)</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">修改输入框占位符样式(placeholder)</h1>
+        <pre class="pre">
 input::-webkit-input-placeholder {
     color: rgb(140, 140, 140);
     font-size: 14px;
 }
 </pre>
     </section>
-    <section>
-        <h1>设置背景图片CSS</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">设置背景图片CSS</h1>
+        <pre class="pre">
 var urlStr = 'url(' + ret.data + ')';
 $('#game').css("background-image", urlStr);
 </pre>
     </section>
-    <section>
-        <h1>阻止向上冒泡</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">阻止向上冒泡</h1>
+        <pre class="pre">
 event.stopPropagation();
 </pre>
     </section>
-    <section>
-        <h1>监听win显示到前端事件</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">监听win显示到前端事件</h1>
+        <pre class="pre">
 api.addEventListener({
     name: 'viewappear'
 }, function(ret, err) {
@@ -77,45 +102,13 @@ api.addEventListener({
 });
 </pre>
     </section>
-    <section>
-        <h1>双击退出应用</h1>
-        <pre>
-var exit_app = function() {
-    api.addEventListener({
-        name: 'keyback'
-    }, function(ret, err) {
-        api.toast({
-            msg: '再次点击退出' + api.appName,
-            duration: 2000,
-            location: 'bottom'
-        });
-        api.addEventListener({
-            name: 'keyback'
-        }, function(ret, err) {
-            api.closeWidget({
-                id: 'A6918353911387', //你的APPid
-                retData: {
-                    name: 'closeWidget'
-                },
-                animation: {
-                    type: 'flip',
-                    subType: 'from_bottom',
-                    duration: 500
-                },
-                silent: true
-            });
-        });
-        setTimeout(function() {
-            exit_app();
-        }, 2000);
-    });
-}
-exit_app();
-        </pre>
+    <section class="section">
+        <h1 class="h1">双击退出应用</h1>
+        <pre class="pre" id="exit-app"></pre>
     </section>
-    <section>
-        <h1>表单验证模块</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">表单验证模块</h1>
+        <pre class="pre">
 /*表单验证模块 -start-*/
 var data = {},
     dataInfo = {},
@@ -187,42 +180,42 @@ for (var i in dataInfo) {
 
         </pre>
     </section>
-    <section>
-        <h1>时间-补0</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">时间-补0</h1>
+        <pre class="pre">
 minute = Number(minute);
 if (minute < 10) {
     minute = '0' + minute;
 }
         </pre>
     </section>
-    <section>
-        <h1>输入控制-手机号和验证码(正整数)</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">输入控制-手机号和验证码(正整数)</h1>
+        <pre class="pre">
 oninput="/^[0-9]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
         </pre>
     </section>
-    <section>
-        <h1>输入控制-金额(正数)</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">输入控制-金额(正数)</h1>
+        <pre class="pre">
 oninput="/^[0-9]*(\.)?[0-9]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
         </pre>
     </section>
-    <section>
-        <h1>输入控制-密码</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">输入控制-密码</h1>
+        <pre class="pre">
 oninput="/^[\w\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\[\]\{\}\|\;\:\,\.\/\<\>\?]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
         </pre>
     </section>
-    <section>
-        <h1>输入控制-中文</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">输入控制-中文</h1>
+        <pre class="pre">
 oninput="/^[\u4e00-\u9fa5]*$/.test(this.value) ? this.setAttribute('data-on-val', this.value) : this.value = this.getAttribute('data-on-val');" data-on-val=""
         </pre>
     </section>
-    <section>
-        <h1>0.5像素边框</h1>
-        <pre>
+    <section class="section">
+        <h1 class="h1">0.5像素边框</h1>
+        <pre class="pre">
 .search-wrap:before {
     border-radius: 28px;
     content: '';
@@ -236,18 +229,218 @@ oninput="/^[\u4e00-\u9fa5]*$/.test(this.value) ? this.setAttribute('data-on-val'
 }
         </pre>
     </section>
-    <script src="../script/common.js"></script>
+    <!-- <script src="./js/common.js"></script> -->
     <script type="text/javascript">
-    /*方法定义*/
-    function loadData() {
+    var pre_handle = $(".pre");
+    var h1_handle = $(".h1");
+    var section_handle = $(".section");
 
-    }
+    h1_handle.on("click", function() {
+        var that = $(this),
+            parent = that.parent();
+
+        if (parent.hasClass('active')) {
+
+            parent.removeClass('active');
+
+        } else {
+
+            section_handle.removeClass('active');
+            parent.addClass('active');
+
+        }
+    });
+
 
     /*初始化*/
-    Q.ready(function() {
-        loadData();
-    });
+    // Q.ready(function() {
+    //     loadData();
+    // });
     </script>
 </body>
+<script>
+function wx_pay_wrap() {
+    /**
+     * 微信支付
+     * @param  {String}   description 商品或支付订单简要描述
+     * @param  {String}   totalFee    订单总金额，只能为整数，单位：分（￥）
+     * @param  {String}   tradeNo     商户系统内部的订单号，32个字符以内，可包含字母
+     * @param  {function} callback    微信支付回调函数
+     * @param  {String}   apiKey      从微信开放平台获取的 appid
+     * @param  {String}   mchId       商家和微信合作的 id 号
+     * @param  {String}   partnerKey  商户 API 密钥
+     * @param  {String}   notifyUrl   支付结果回调页面
+     * @return {None}             没有返回值
+     */
+    function wx_pay(description, totalFee, tradeNo, callback, apiKey, mchId, partnerKey, notifyUrl) {
+
+        totalFee = parseFloat(totalFee) * 100 + '';
+
+        var wxPay = api.require('wxPay');
+        wxPay.config({
+            apiKey: apiKey,
+            mchId: mchId,
+            partnerKey: partnerKey,
+            notifyUrl: notifyUrl
+        }, function(ret, err) {
+            if (ret.status) {
+                wxPay.pay({
+                    description: description,
+                    totalFee: totalFee,
+                    tradeNo: tradeNo
+                }, callback(ret, err));
+            } else if (err && err.code) {
+                switch (err.code) {
+                    case -1:
+                        alert('未知错误');
+                        break;
+                    case 1:
+                        alert('apiKey值非法');
+                        break;
+                    case 2:
+                        alert('mchId值非法');
+                        break;
+                    case 3:
+                        alert('partnerKey值非法');
+                        break;
+                    case 4:
+                        alert('notifyUrl值非法');
+                        break;
+                }
+            }
+        });
+    }
+    // wx_pay('维修订单', '0.01', 'ASDIF90VISD909232', function(ret, err) {
+
+    //     if (ret.status) {
+
+    //         alert('支付成功');
+
+    //     } else if (err && err.code) {
+    //         switch (err.code) {
+    //             case -2:
+
+    //                 alert('支付已取消');
+
+    //                 break;
+    //             case -1:
+
+    //                 alert(err.msg);
+
+    //                 break;
+    //             case 1:
+
+    //                 alert('必传参数缺失');
+
+    //                 break;
+    //             default:
+
+    //                 alert('未知错误');
+
+    //                 break;
+    //         }
+    //     }
+    // });
+}
+$('#wxpay').html(wx_pay_wrap + '');
+
+function ali_pay_wrap() {
+    /**
+     * 支付宝支付
+     * @param  {String}   subject   交易商品名
+     * @param  {String}   body      交易商品的简介
+     * @param  {String}   amount    交易商品的价钱（单位为元，精确到分如：10.29元）
+     * @param  {String}   tradeNO   交易订单编号
+     * @param  {Function} callback  回调函数
+     * @param  {String}   partner   商户 Id
+     * @param  {String}   seller    商户账户 Id
+     * @param  {String}   rsaPriKey 商户私钥
+     * @param  {String}   rsaPubKey 支付宝公钥
+     * @param  {String}   notifyURL 支付完成回调地址
+     * @return {None}             没有返回值
+     */
+    function ali_pay(subject, body, amount, tradeNO, callback, partner, seller, rsaPriKey, rsaPubKey, notifyURL) {
+
+        var aliPay = api.require('aliPay');
+        aliPay.config({
+            partner: partner,
+            seller: seller,
+            rsaPriKey: rsaPriKey,
+            rsaPubKey: rsaPubKey,
+            notifyURL: notifyURL
+        }, function(ret, err) {
+            aliPay.pay({
+                subject: subject,
+                body: body,
+                amount: amount,
+                tradeNO: tradeNO
+            }, callback);
+        });
+    }
+
+    // ali_pay('保养订单', '车主管家', '0.01', function(ret, err) {
+    //     switch (ret.code) {
+    //         case '6001':
+    //             tips('支付已取消');
+
+    //             break;
+
+    //         case '9000':
+    //             tips('支付成功');
+
+    //             break;
+
+    //         case '4000':
+    //             tips('系统异常');
+
+    //             break;
+
+    //         case '4006':
+    //             tips('支付失败');
+
+    //             break;
+
+    //         default:
+    //             tips('未知错误');
+
+    //             break;
+    //     }
+    // });
+}
+$('#alipay').html(ali_pay_wrap + '');
+
+
+var exit_app = function() {
+    api.addEventListener({
+        name: 'keyback'
+    }, function(ret, err) {
+        api.toast({
+            msg: '再次点击退出' + api.appName,
+            duration: 2000,
+            location: 'bottom'
+        });
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            api.closeWidget({
+                id: api.appId,
+                retData: {
+                    name: 'closeWidget'
+                },
+                animation: {
+                    type: 'flip',
+                    subType: 'from_bottom',
+                    duration: 500
+                },
+                silent: true
+            });
+        });
+        setTimeout(function() {
+            exit_app();
+        }, 2000);
+    });
+}
+$('#exit-app').html(exit_app + '');
+</script>
 
 </html>
